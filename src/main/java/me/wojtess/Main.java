@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         initPrintStreamHook();
         ModulesManager.init();
-        while(Thread.getAllStackTraces().keySet().size() != 0) {
+        while(true) {
             ;
         }
     }

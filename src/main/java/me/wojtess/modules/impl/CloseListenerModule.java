@@ -17,7 +17,11 @@ public class CloseListenerModule extends Module implements PostInitialization {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             EventsModule module = ModulesManager.getModule(EventsModule.class);
             if(module != null) {
-                module.callEvent(new CloseEvent());
+                CloseEvent event = new CloseEvent();
+                module.callEvent(event);
+                if(!event.isCancelled()) {
+                    Runtime.getRuntime().halt(0);
+                }
             }
         }));
     }

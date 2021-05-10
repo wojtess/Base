@@ -5,9 +5,11 @@ import java.util.Objects;
 public class Event {
 
     private EventState state;
+    private boolean cancelled;
 
     public Event(EventState state) {
         this.state = state;
+        this.cancelled = false;
     }
 
     public EventState getState() {
@@ -18,10 +20,19 @@ public class Event {
         this.state = state;
     }
 
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
                 "state=" + state +
+                ", cancelled=" + cancelled +
                 '}';
     }
 
@@ -30,7 +41,8 @@ public class Event {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return state == event.state;
+        return cancelled == event.cancelled &&
+                state == event.state;
     }
 
     @Override
